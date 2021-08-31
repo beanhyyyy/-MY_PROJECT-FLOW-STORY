@@ -1,0 +1,1 @@
+- atoms (nguyên tử): chứa các components được HOC lại từ MUI components. Không chứa style margin và position, logic, action hay function gì ở đây.
