@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
-import mulishFontfaces from '../utils/mulishFontfaces';
+import React from "react";
+import PropTypes from "prop-types";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { CssBaseline } from "@material-ui/core";
+import mulishFontfaces from "../utils/mulishFontfaces";
 
 // https://material-ui.com/customization/palette/#dark-mode
 /* https://material-ui.com/customization/globals/#global-css */
@@ -12,77 +12,77 @@ export default function HaloThemeProvider(props) {
   const defaultTheme = React.useMemo(() =>
     createTheme({
       // direction: rtl ? 'rtl' : 'ltr', // chuyển đổi hướng bố cục
-      direction: 'ltr', // chuyển đổi hướng bố cục
+      direction: "ltr", // chuyển đổi hướng bố cục
 
       typography: {
         fontFamily: [
-          'Mulish',
-          '-apple-system', // mac OS , iOS
-          'BlinkMacSystemFont',
+          "Mulish",
+          "-apple-system", // mac OS , iOS
+          "BlinkMacSystemFont",
           '"Segoe UI"', // window
-          'Roboto', // android
+          "Roboto", // android
           '"Helvetica Neue"',
-          'Arial',
-          'sans-serif',
+          "Arial",
+          "sans-serif",
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"'
-        ].join(',')
+          '"Segoe UI Symbol"',
+        ].join(","),
       },
       /* ghi đè lại font face */
       overrides: {
         MuiCssBaseline: {
-          '@global': {
-            '*': {
-              'scrollbar-width': 'thin'
+          "@global": {
+            "*": {
+              "scrollbar-width": "thin",
             },
-            '*::-webkit-scrollbar': {
-              width: 6
+            "*::-webkit-scrollbar": {
+              width: 6,
             },
-            '*::-webkit-scrollbar-track': {
-              '-webkit-border-radius': 10,
-              background: '#f5f5f5'
+            "*::-webkit-scrollbar-track": {
+              "-webkit-border-radius": 10,
+              background: "#f5f5f5",
             },
-            '*::-webkit-scrollbar-thumb': {
-              '-webkit-border-radius': 10,
+            "*::-webkit-scrollbar-thumb": {
+              "-webkit-border-radius": 10,
               borderRadius: 10,
-              background: '#bdbdbd'
+              background: "#bdbdbd",
             },
-            '@font-face': mulishFontfaces,
+            "@font-face": mulishFontfaces,
             body: {
-              overflowX: 'hidden',
+              overflowX: "hidden",
               // backgroundColor: darkMode ? '#212121' : '#FAFAFB'
-              backgroundColor: '#FAFAFB',
-              minHeight: '110vh'
+              backgroundColor: "#FAFAFB",
+              // minHeight: '110vh'
             },
             strong: {
-              fontWeight: 600
+              fontWeight: 600,
             },
             b: {
-              fontWeight: 600
+              fontWeight: 600,
             },
             a: {
-              color: '#24a8d8'
-            }
-          }
-        }
+              color: "#24a8d8",
+            },
+          },
+        },
       },
       palette: {
         // type: darkMode ? 'dark' : 'light',
-        type: 'light',
+        type: "light",
         primary: {
-          light: '#4fb9df',
-          main: '#24a8d8',
-          dark: '#197597',
-          contrastText: '#fff'
+          light: "#4fb9df",
+          main: "#24a8d8",
+          dark: "#197597",
+          contrastText: "#fff",
         },
         success: {
-          light: '#3bcf88',
-          main: '#0ac46b',
-          dark: '#07894a',
-          contrastText: '#fff'
-        }
-      }
+          light: "#3bcf88",
+          main: "#0ac46b",
+          dark: "#07894a",
+          contrastText: "#fff",
+        },
+      },
     })
   );
 
@@ -95,6 +95,6 @@ export default function HaloThemeProvider(props) {
 }
 HaloThemeProvider.propTypes = {
   children: PropTypes.any,
-  theme: PropTypes.any
+  theme: PropTypes.any,
 };
 HaloThemeProvider.defaultProps = {};
