@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import AtomBox from "../../../Atomic/atoms/Box";
 import AtomRouterLink from "../../../Atomic/atoms/RouterLink";
+import { colorTypo } from "../../../Atomic/_settings/variables";
 
 const useStyle = makeStyles((theme) => ({
   body: {
@@ -39,13 +40,13 @@ const useStyle = makeStyles((theme) => ({
   text2: {
     fontSize: "36px",
     fontWeight: "700",
-    color: "#ea4335",
+    color: colorTypo,
     animation: "$text2 1.5s ease infinite",
   },
   text3: {
     fontSize: "36px",
     fontWeight: "700",
-    color: "#ea4335",
+    color: colorTypo,
   },
 
   // heart: {

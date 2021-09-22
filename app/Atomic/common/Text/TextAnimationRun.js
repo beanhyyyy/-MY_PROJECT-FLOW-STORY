@@ -1,5 +1,6 @@
 import React from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import { colorTypo } from '../../_settings/variables';
 
 const useStyle = makeStyles((theme) => ({
   styleWrapper: {
@@ -9,7 +10,7 @@ const useStyle = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   styleStaticText: {
-    color: "#ea4335",
+    color: colorTypo,
     fontSize: "24px",
     fontWeight: 400,
   },
@@ -17,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     position: "relative",
   },
   styleSpan: {
-    color: "#ea4335",
+    color: colorTypo,
     listStyle: "none",
     fontSize: "24px",
     fontWeight: 500,
@@ -33,10 +34,10 @@ const useStyle = makeStyles((theme) => ({
   },
   "@keyframes typing": {
     "0%": {
-      borderLeft: "2px solid #ea4335",
+      borderLeft: `2px solid ${colorTypo}`,
     },
     "100%": {
-      borderLeft: "2px solid #ea4335",
+      borderLeft: `2px solid ${colorTypo}`,
       left: "90%",
       margin: "0px -35px 0px 35px",
     },

@@ -16,3 +16,5 @@ export const affSidebarWidth = 280;
 
 export const AIRLINE_IMAGE_PATH =
   'https://test-html.hahalolo.com/assets/img/AirlineImages/';
+
+export const colorTypo = '#ea4335';
