@@ -42,6 +42,11 @@ const useStyle = makeStyles((theme) => ({
     color: "#ea4335",
     animation: "$text2 1.5s ease infinite",
   },
+  text3: {
+    fontSize: "36px",
+    fontWeight: "700",
+    color: "#ea4335",
+  },
 
   // heart: {
   //   display: 'inline-block',
@@ -101,6 +106,9 @@ export default function HomePage() {
           <div className={classes.container}>
             <span className={classes.text1}>WELCOME IN</span>
             <span className={classes.text2}>VLU</span>
+            <span className={classes.text3}>CHÀO ĐÓN K27 KHOA XÃ HỘI VÀ NHÂN VĂN</span>
+    
+
             {/* <span className={classes.heart} /> */}
           </div>
         </AtomBox>
