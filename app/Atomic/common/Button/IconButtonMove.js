@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     padding: theme.spacing(1),
     fontSize: theme.typography.caption.fontSize,
-    maxWidth: "25vw",
+    width: "40vw",
     overflow: "hidden",
   },
   styleIcon: {
-    fontSize: theme.spacing(10),
+    fontSize: theme.spacing(5),
     animation: "$scaleButton 1.5s alternate infinite ease-in",
     color: colorTypo,
   },
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     to: { transform: "scale(1.2)" },
   },
 }));
-export default function IconButtonMove({ left, right, go, back, content }) {
+export default function IconButtonMove({ left, right, go, back, content, button }) {
   const classes = useStyles();
 
   /* handle đóng mở popper */
@@ -60,6 +60,7 @@ export default function IconButtonMove({ left, right, go, back, content }) {
           {right && <ArrowForwardIcon className={classes.styleIcon} />}
           {go && <ArrowUpwardIcon className={classes.styleIcon} />}
           {back && <ArrowDownwardIcon className={classes.styleIcon} />}
+          {button && <div className={classes.styleIcon}>{button}</div>}
         </AtomIconButton>
 
         <AtomPopper
@@ -88,4 +89,5 @@ IconButtonMove.propTypes = {
   go: PropTypes.bool,
   back: PropTypes.bool,
   content: PropTypes.any,
+  button: PropTypes.any,
 };

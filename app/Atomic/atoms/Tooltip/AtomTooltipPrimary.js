@@ -10,7 +10,6 @@ const AtomTooltipPrimary = withStyles(
       color: theme.palette.common.white,
       padding: theme.spacing(1),
       fontSize: theme.typography.caption.fontSize,
-      maxWidth: "25vw",
       overflow: "hidden",
     },
     arrow: {

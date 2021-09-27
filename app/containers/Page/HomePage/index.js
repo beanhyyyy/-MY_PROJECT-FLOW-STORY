@@ -4,12 +4,12 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import AtomBox from "../../../Atomic/atoms/Box";
 import AtomRouterLink from "../../../Atomic/atoms/RouterLink";
 import { colorTypo } from "../../../Atomic/_settings/variables";
-import imageHHLL from "images/imageHHLL.jpg";
+import imageWelcome from "images/imageWelcome.jpg";
 import PageBackground from "Atomic/templates/PageBackground";
 
 const useStyle = makeStyles((theme) => ({
   body: {
-    background: imageHHLL,
+    // background: imageWelcome,
     height: "100vh",
     width: "100%",
   },
@@ -32,7 +32,7 @@ const useStyle = makeStyles((theme) => ({
     letterSpacing: "8px",
     marginBottom: "20px",
 
-    color: "white",
+    color: "#ffff33",
 
     position: "relative",
     animation: "$text1 3s 1",
@@ -40,13 +40,13 @@ const useStyle = makeStyles((theme) => ({
   text2: {
     fontSize: "36px",
     fontWeight: "700",
-    color: "white",
+    color: "#ffff33",
     animation: "$text2 1.5s ease infinite",
   },
   text3: {
     fontSize: "24px",
     fontWeight: "700",
-    color: colorTypo,
+    color: 'white',
   },
 
   // heart: {
@@ -82,12 +82,12 @@ const useStyle = makeStyles((theme) => ({
   //   }
   // },
   "@keyframes text1": {
-    from: { color: "black", marginBottom: "-60px" },
+    from: { color: "white", marginBottom: "-60px" },
     "30%": { letterSpacing: "25px", marginBottom: "-60px" },
     "85%": { letterSpacing: "8px", marginBottom: "-60px" },
   },
   "@keyframes text2": {
-    from: { color: "black" },
+    from: { color: "white" },
     "30%": { letterSpacing: "20px" },
     "85%": { letterSpacing: "8px" },
   },
@@ -107,15 +107,14 @@ export default function HomePage() {
             <span className={classes.text1}>WELCOME TO</span>
             <span className={classes.text2}>Sohu</span>
             <span className={classes.text3}>
-              {/* CHÀO ĐÓN K27 KHOA XÃ HỘI VÀ NHÂN VĂN */}
-              fsdf 123123
+              <b>CHÀO ĐÓN K27 KHOA XÃ HỘI VÀ NHÂN VĂN</b>
             </span>
             {/* <img src={imageHHLL} alt="123" /> */}
 
             {/* <span className={classes.heart} /> */}
           </div>
         </AtomBox>
-        <PageBackground image={imageHHLL} />
+        <PageBackground image={imageWelcome} />
       </div>
     </>
   );

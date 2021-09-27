@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import mulishFontfaces from '../utils/mulishFontfaces';
+import { colorTypo } from '../Atomic/_settings/variables';
 
 // https://material-ui.com/customization/palette/#dark-mode
 /* https://material-ui.com/customization/globals/#global-css */
@@ -53,7 +54,7 @@ export default function HaloThemeProvider(props) {
               overflowX: 'hidden',
               // backgroundColor: darkMode ? '#212121' : '#FAFAFB'
               backgroundColor: '#FAFAFB',
-              minHeight: '110vh'
+              // minHeight: '110vh'
             },
             strong: {
               fontWeight: 600
@@ -71,9 +72,9 @@ export default function HaloThemeProvider(props) {
         // type: darkMode ? 'dark' : 'light',
         type: 'light',
         primary: {
-          light: '#4fb9df',
-          main: '#24a8d8',
-          dark: '#197597',
+          light: colorTypo,
+          main: colorTypo,
+          dark: colorTypo,
           contrastText: '#fff'
         },
         success: {

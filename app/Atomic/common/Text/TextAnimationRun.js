@@ -26,14 +26,14 @@ const useStyle = makeStyles((theme) => ({
     "&:after": {
       content: '""',
       position: "absolute",
-      top: 0,
+      top: -2,
       left: 0,
       bottom: 0,
       width: "100vw",
-      height: "100%",
+      height: "110%",
       background: linearColor,
       // borderLeft: "2px solid white",
-      animation: "$typing 4s steps(30) infinite",
+      animation: "$typing 6s steps(40) infinite",
     },
   },
   "@keyframes typing": {
@@ -42,21 +42,21 @@ const useStyle = makeStyles((theme) => ({
     },
     "100%": {
       borderLeft: `2px solid ${colorTypo}`,
-      left: "25vw",
+      left: "100vw",
       margin: "0px -35px 0px 35px",
     },
   },
 }));
 
-export default function TextAnimationRun({ title, content }) {
+export default function TextAnimationRun({ title, content, propsContent }) {
   const classes = useStyle();
 
   return (
-    <div className={classes.styleWrapper}>
-      <div className={classes.styleStaticText}>{title}&nbsp;</div>
+    <span className={classes.styleWrapper}>
+      <span className={classes.styleStaticText}>{title}&nbsp;</span>
       <span className={classes.styleDynamicText}>
-        <span className={classes.styleSpan}>{content}</span>
+        <span className={classes.styleSpan} {...propsContent}>{content}</span>
       </span>
-    </div>
+    </span>
   );
 }
