@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -14,15 +14,19 @@ import FullScreenIcon from 'icons/FullScreenIcon';
 import CloseIcon from 'icons/CloseIcon';
 import TagIcon from 'icons/TagIcon';
 import AtomBox from '../../atoms/Box';
+import AtomIconButton from '../../atoms/IconButton';
+
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 
 const breakpoint = 'md'; // điểm chuyển layout
 
 export const useStyles = makeStyles(theme => ({
   dialogContent: {
     overflowY: 'auto',
-    [theme.breakpoints.up(breakpoint)]: {
-      overflow: 'hidden',
-    },
+
+    overflow: 'hidden',
+
   },
   dialogContentLeft: {
     position: 'relative',
@@ -68,7 +72,6 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: theme.spacing(0, 2),
-    opacity: 0.5,
     '&:hover': {
       opacity: 1,
       backgroundColor: theme.palette.action.focus,
@@ -93,6 +96,24 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [indexImage, setIndexImage] = useState(0);
+
+  const handleBackImage = () => {
+    if(indexImage - 1 > -1){
+      setIndexImage(indexImage - 1)
+    }
+  }
+
+  const handleNextImage = () => {
+    if(indexImage + 1 < mediaProps.length){
+      setIndexImage(indexImage + 1)
+    }
+  }
+
+  useEffect(()=> {
+    setIndexImage(0)
+  }, [])
 
   return (
     <React.Fragment>
@@ -126,7 +147,7 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                         <MakeGrid
                           containerProps={{
                             alignItems: 'center',
-                            justify: 'space-between',
+                            justifyContent: 'space-between',
                           }}
                           grids={[
                             {
@@ -159,24 +180,23 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                       </AtomToolbar>
 
                       <div className={classes.mediaContainer}>
-                        <img
-                          className={classes.mediaItem}
-                          alt=""
-                          {...mediaProps}
-                        />
+                          <img
+                            className={classes.mediaItem}
+                            src={mediaProps[indexImage] && mediaProps[indexImage].src}
+                            alt={mediaProps[indexImage] && mediaProps[indexImage].alt}
+                          />
                       </div>
 
                       {/* thanh điều hướng */}
-                      {/* <nav>
+                      <nav>
                         <div
                           className={clsx(
-
                             classes.navButton,
                             classes.prevButton,
                           )}
                         >
-                          <AtomIconButtonDark aria-label="previous">
-                            <ArrowLeftLargeIcon  />
+                          <AtomIconButtonDark aria-label="previous" onClick={handleBackImage}>
+                            <NavigateBeforeIcon />
                           </AtomIconButtonDark>
                         </div>
                         <div
@@ -186,11 +206,11 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                             classes.nextButton,
                           )}
                         >
-                          <AtomIconButtonDark aria-label="next">
-                            <ArrowRightLargeIcon />
+                          <AtomIconButtonDark aria-label="next" onClick={handleNextImage}>
+                            <NavigateNextIcon />
                           </AtomIconButtonDark>
                         </div>
-                      </nav> */}
+                      </nav>
                     </div>
                   ),
                   props: { xs: 12, md: true },
@@ -205,5 +225,5 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
 }
 ViewMediaGDS.propTypes = {
   children: PropTypes.node, // thành phần để mở ảnh
-  mediaProps: PropTypes.object, // thông tin media (src, title, alt...)
+  mediaProps: PropTypes.any, // thông tin media (src, title, alt...)
 };
