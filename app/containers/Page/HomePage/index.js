@@ -16,7 +16,7 @@ const useStyle = makeStyles((theme) => ({
   container: {
     textAlign: "center",
     position: "absolute",
-    top: "50%",
+    top: "20%",
     left: "50%",
     transform: "translate(-50%,-50%)",
     width: "100%",
@@ -44,9 +44,20 @@ const useStyle = makeStyles((theme) => ({
     animation: "$text2 1.5s ease infinite",
   },
   text3: {
-    fontSize: "24px",
+    fontSize: "26px",
     fontWeight: "700",
     color: 'white',
+    background: colorTypo,
+    width: '35vw',
+    textAlign: "center",
+    position: "absolute",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    marginTop: '5vh',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '10vh',
+      width: '100vw',
+    },
   },
 
   // heart: {

@@ -72,6 +72,7 @@
     "overlayscrollbars-react": "^0.2.3",
     "prop-types": "15.7.2",
     "react": "16.8.6",
+    "react-audio-player": "^0.17.0",
     "react-dom": "16.8.6",
     "react-draggable": "^4.4.4",
     "react-helmet": "6.0.0-beta",

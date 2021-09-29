@@ -43,6 +43,8 @@ export const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
+
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up(breakpoint)]: {
       padding: theme.spacing(4),
@@ -55,6 +57,12 @@ export const useStyles = makeStyles(theme => ({
     objectFit: 'contain',
     outline: 'none',
     borderRadius: '9px',
+    transition: "all 2s ease",
+
+    "&:hover": {
+      transform: 'scale(1.2, 1.2)',
+    },
+
   },
   mediaToolbar: {
     position: 'absolute',

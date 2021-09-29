@@ -41,6 +41,12 @@ import MakeGrid from "../../../Atomic/molecules/Grid/MakeGrid";
 import AtomCardContent from "../../../Atomic/atoms/CardContent";
 import AtomDivider from "../../../Atomic/atoms/Divider";
 import SectionTemplate from "../../../Atomic/templates/SectionTemplate";
+import ButtonMove from "../../../Atomic/common/Button/ButtonMove";
+import AtomIconButton from "../../../Atomic/atoms/IconButton";
+
+import ReactAudioPlayer from 'react-audio-player';
+
+import AudioB1 from './AudioB1.mp3'
 
 const useStyles = makeStyles((theme) => ({
   styleDiv: {
@@ -51,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     left: '50%',
     top: '90vh',
+    [theme.breakpoints.down('sm')]: {
+      top: '80vh',
+    },
   },
   styleContent:{
     position: "absolute",
@@ -59,8 +68,10 @@ const useStyles = makeStyles((theme) => ({
     top: '80vh',
     overflow: 'hidden',
     background: linearColor,
+
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
-      top: '10vh',
+      top: '70vh',
     },
     [theme.breakpoints.down('md')]: {
       width: '90vw',
@@ -69,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
       width: '40vw',
     },
     [theme.breakpoints.up('lg')]: {
-      width: '25vw',
+      width: '35vw',
     },
   },
   styleImage: {
@@ -88,7 +99,6 @@ const useStyles = makeStyles((theme) => ({
     "& #image1": {
       width: "100%",
       verticalAlign: "top",
-      transition: "all 1s ease",
       transition: "all 1s ease",
     },
 
@@ -114,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
       // opacity: 0.6,
       // transform: 'scale(1.5,1.5)',
       "& #styleDivContent": {
-        height: "50%",
+        height: "35%",
         [theme.breakpoints.down('md')]: {
           height: "50%",
         },
@@ -128,7 +138,11 @@ const useStyles = makeStyles((theme) => ({
         transform: "scale(1.3,1.3)",
       },
     },
+
   },
+ 
+
+
   // styleHover: {
   //   position: 'absolute',
   //   top: 0,
@@ -142,14 +156,19 @@ const useStyles = makeStyles((theme) => ({
   //   },
   // },
   styleContentImage: {
-    paddingTop: '20vh',
+    paddingTop: '10vh',
     paddingLeft: '5vw',
     paddingRight: '5vw',
     [theme.breakpoints.down('md')]: {
+      paddingTop: '5vh',
+    },
+    [theme.breakpoints.down('sm')]: {
       paddingTop: '15vh',
     },
   },
-
+  styleRadio: {
+    display: 'none',
+  }
 
 }));
 export default function SchoolPage() {
@@ -162,23 +181,85 @@ export default function SchoolPage() {
   }
   return (
     <>
+  
+    <div className={classes.styleRadio}>
+    <ReactAudioPlayer
+  src={AudioB1}
+  autoPlay
+  controls
+  loop
+/>
+    </div>
       <Helmet titleTemplate="%s - SCHOOL PAGE" defaultTitle="SCHOOL PAGE">
         <meta name="description" content="A VLU : SCHOOL PAGE" />
       </Helmet>
       <div className={classes.styleDiv}>
         <div className={classes.styleButtonTop}>
-        <AtomButtonLink color='primary' onClick={handleShowImage}>
-          <AtomTypography variant='h5'>
-          <b>Let's go !!!</b>
-          </AtomTypography>
-        </AtomButtonLink>
+        <AtomIconButton color='primary' onClick={handleShowImage}>
+          <ButtonMove go />
+        </AtomIconButton>
         </div>
         <span className={classes.styleContent}>
             <TextAnimationRun content="Chào mọi người đến với khuôn viên của Trường!" propsContent={{style: {fontSize: '20px', textAlign: 'center'}}} />
           </span>
 
           <div className={classes.styleContentImage}>
-          {showImage && <MakeGrid
+          {showImage && <>
+           <MakeGrid 
+           containerProps={{justifyContent: 'center'}}
+           allGridProps={{xs:12, sm: 8}}
+           grids={[{
+             children:(
+              <ViewMediaGDS
+              mediaProps={[
+                {
+                  src: B2,
+                  alt: 'B2',
+                },{
+                src: B22,
+                alt: 'B22',
+              },{
+                src: B23,
+                alt: 'B23',
+              },{
+                src: B24,
+                alt: 'B24',
+              },{
+                src: B25,
+                alt: 'B25',
+              },{
+                src: B26,
+                alt: 'B26',
+              },{
+                src: B27,
+                alt: 'B27',
+              },{
+                src: B28,
+                alt: 'B28',
+              }]}
+            >
+              <AtomCardMedia43
+                image={B2}
+                alt='B2'
+                className={classes.styleImage}
+              >
+                <div id="styleDivContent">
+                 <AtomCardContent>
+               <SectionTemplate spacing={1}> 
+               <AtomTypography variant='body2'><b>Title</b></AtomTypography>
+                 <AtomDivider style={{width: '20%', background: 'white'}} />
+                  <AtomTypography variant='caption'>Content</AtomTypography>
+               </SectionTemplate>
+                 </AtomCardContent>
+                </div>
+              </AtomCardMedia43>
+            </ViewMediaGDS>
+             )
+           }]} />
+
+
+
+            {/* <MakeGrid
          allGridProps={{xs:12, sm: 6, md: 3}}
          grids={[{
            children: (
@@ -333,7 +414,12 @@ export default function SchoolPage() {
            </AtomCardMedia43>
          </ViewMediaGDS>
           )
-        }]} />}          </div>
+        }]} /> */}
+          
+          
+          
+          </>}        
+          </div>
 
          
         
