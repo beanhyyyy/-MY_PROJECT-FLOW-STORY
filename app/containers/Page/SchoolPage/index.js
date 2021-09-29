@@ -156,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
   //   },
   // },
   styleContentImage: {
-    paddingTop: '10vh',
+    paddingTop: '5vh',
     paddingLeft: '5vw',
     paddingRight: '5vw',
     [theme.breakpoints.down('md')]: {
@@ -207,7 +207,7 @@ export default function SchoolPage() {
           {showImage && <>
            <MakeGrid 
            containerProps={{justifyContent: 'center'}}
-           allGridProps={{xs:12, sm: 8}}
+           allGridProps={{xs:12, sm: 8, md: 6}}
            grids={[{
              children:(
               <ViewMediaGDS

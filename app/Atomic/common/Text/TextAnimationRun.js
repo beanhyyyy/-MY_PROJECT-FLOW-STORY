@@ -38,10 +38,10 @@ const useStyle = makeStyles((theme) => ({
   },
   "@keyframes typing": {
     "0%": {
-      borderLeft: `2px solid ${colorTypo}`,
+      // borderLeft: `2px solid ${colorTypo}`,
     },
     "100%": {
-      borderLeft: `2px solid ${colorTypo}`,
+      // borderLeft: `2px solid ${colorTypo}`,
       left: "100vw",
       margin: "0px -35px 0px 35px",
     },
