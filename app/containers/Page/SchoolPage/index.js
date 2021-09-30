@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      top: "70vh",
+      top: "10vh",
     },
     [theme.breakpoints.down("md")]: {
       width: "90vw",
@@ -168,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: "5vh",
     },
     [theme.breakpoints.down("sm")]: {
-      paddingTop: "15vh",
+      paddingTop: "25vh",
     },
   },
   styleRadio: {
@@ -340,7 +340,7 @@ export default function SchoolPage() {
             <div>
               <MakeGrid
                 containerProps={{ justifyContent: "center" }}
-                allGridProps={{ xs: 12, sm: 9, md: 6 }}
+                allGridProps={{ xs: 12, sm: 9, md: 9, lg: 6 }}
                 grids={[
                   {
                     children: (
