@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import TextAnimationRun from "../../../Atomic/common/Text/TextAnimationRun";
 
+import SwipeableViews from "react-swipeable-views";
+
 // import B1 from "images/B1.png";
-import welcomeBackground2 from 'images/welcomeBackground2.jpg';
+import welcomeBackground2 from "images/welcomeBackground2.jpg";
 
 import B2 from "images/B2.jpg";
-import B22 from 'images/B22.jpg';
-import B23 from 'images/B23.jpg';
-import B24 from 'images/B24.jpg';
-import B25 from 'images/B25.jpg';
-import B26 from 'images/B26.jpg';
-import B27 from 'images/B27.jpg';
-import B28 from 'images/B28.jpg';
+import B22 from "images/B22.jpg";
+import B23 from "images/B23.jpg";
+import B24 from "images/B24.jpg";
+import B25 from "images/B25.jpg";
+import B26 from "images/B26.jpg";
+import B27 from "images/B27.jpg";
+import B28 from "images/B28.jpg";
 
 import B3 from "images/B3.jpg";
 import B32 from "images/B32.jpg";
@@ -44,9 +46,15 @@ import SectionTemplate from "../../../Atomic/templates/SectionTemplate";
 import ButtonMove from "../../../Atomic/common/Button/ButtonMove";
 import AtomIconButton from "../../../Atomic/atoms/IconButton";
 
-import ReactAudioPlayer from 'react-audio-player';
+import Pagination from "../../../Atomic/common/Pagination";
 
-import AudioB1 from './AudioB1.mp3'
+import ReactAudioPlayer from "react-audio-player";
+
+import B1Audio from "./B1Audio.mp3";
+import B2Audio from "./B2Audio.mp3";
+import B3Audio from "./B3Audio.mp3";
+import B4Audio from "./B4Audio.mp3";
+import B5Audio from "./B5Audio.mp3";
 
 const useStyles = makeStyles((theme) => ({
   styleDiv: {
@@ -55,38 +63,38 @@ const useStyles = makeStyles((theme) => ({
   styleButtonTop: {
     position: "absolute",
     transform: "translate(-50%, -50%)",
-    left: '50%',
-    top: '90vh',
-    [theme.breakpoints.down('sm')]: {
-      top: '80vh',
+    left: "50%",
+    top: "90vh",
+    [theme.breakpoints.down("sm")]: {
+      top: "80vh",
     },
   },
-  styleContent:{
+  styleContent: {
     position: "absolute",
     transform: "translate(-50%, -50%)",
-    left: '50%',
-    top: '80vh',
-    overflow: 'hidden',
+    left: "50%",
+    top: "80vh",
+    overflow: "hidden",
     background: linearColor,
 
-    textAlign: 'center',
-    [theme.breakpoints.down('sm')]: {
-      top: '70vh',
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      top: "70vh",
     },
-    [theme.breakpoints.down('md')]: {
-      width: '90vw',
+    [theme.breakpoints.down("md")]: {
+      width: "90vw",
     },
-    [theme.breakpoints.up('md')]: {
-      width: '40vw',
+    [theme.breakpoints.up("md")]: {
+      width: "40vw",
     },
-    [theme.breakpoints.up('lg')]: {
-      width: '35vw',
+    [theme.breakpoints.up("lg")]: {
+      width: "35vw",
     },
   },
   styleImage: {
-    position: 'relative',
-    borderRadius: '9px',
-    height: '100%',
+    position: "relative",
+    borderRadius: "9px",
+    height: "100%",
 
     "& #styleDivContent": {
       position: "absolute",
@@ -95,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       height: 0,
       overflow: "hidden",
+      transition: "all 1s ease",
     },
     "& #image1": {
       width: "100%",
@@ -102,46 +111,42 @@ const useStyles = makeStyles((theme) => ({
       transition: "all 1s ease",
     },
 
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down("md")]: {
       "& #styleDivContent": {
         height: "30%",
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down("md")]: {
           height: "50%",
         },
         transition: "all 1s ease",
         color: "white",
         backgroundColor: theme.palette.action.active,
-        borderRadius: '9px',
+        borderRadius: "9px",
       },
       "& #image1": {
         transition: "all 1s ease",
         transform: "scale(1.3,1.3)",
       },
     },
-
 
     "&:hover": {
       // opacity: 0.6,
       // transform: 'scale(1.5,1.5)',
       "& #styleDivContent": {
-        height: "35%",
-        [theme.breakpoints.down('md')]: {
-          height: "50%",
+        height: "25%",
+        [theme.breakpoints.down("md")]: {
+          height: "35%",
         },
         transition: "all 1s ease",
         color: "white",
         backgroundColor: theme.palette.action.active,
-        borderRadius: '9px',
+        borderRadius: "9px",
       },
       "& #image1": {
         transition: "all 1s ease",
         transform: "scale(1.3,1.3)",
       },
     },
-
   },
- 
-
 
   // styleHover: {
   //   position: 'absolute',
@@ -156,21 +161,134 @@ const useStyles = makeStyles((theme) => ({
   //   },
   // },
   styleContentImage: {
-    paddingTop: '5vh',
-    paddingLeft: '5vw',
-    paddingRight: '5vw',
-    [theme.breakpoints.down('md')]: {
-      paddingTop: '5vh',
+    paddingTop: "5vh",
+    paddingLeft: "5vw",
+    paddingRight: "5vw",
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "5vh",
     },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: '15vh',
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "15vh",
     },
   },
   styleRadio: {
-    display: 'none',
-  }
-
+    display: "none",
+  },
 }));
+
+const dataStep = [
+  {
+    mediaDialog: [
+      {
+        src: B2,
+        alt: "B2",
+      },
+      {
+        src: B22,
+        alt: "B22",
+      },
+      {
+        src: B23,
+        alt: "B23",
+      },
+      {
+        src: B24,
+        alt: "B24",
+      },
+      {
+        src: B25,
+        alt: "B25",
+      },
+      {
+        src: B26,
+        alt: "B26",
+      },
+      {
+        src: B27,
+        alt: "B27",
+      },
+      {
+        src: B28,
+        alt: "B28",
+      },
+    ],
+    title: "Tòa F",
+    content: "Bấm để tiếp tục tham quan tòa F nhé!",
+    audio: B2Audio,
+  },
+  {
+    mediaDialog: [
+      {
+        src: B3,
+        alt: "B3",
+      },
+      {
+        src: B32,
+        alt: "B32",
+      },
+      {
+        src: B33,
+        alt: "B33",
+      },
+    ],
+
+    title: "Title",
+    content: "Content",
+    audio: B3Audio,
+  },
+  {
+    mediaDialog: [
+      {
+        src: B4,
+        alt: "B4",
+      },
+      {
+        src: B42,
+        alt: "B42",
+      },
+      {
+        src: B43,
+        alt: "B43",
+      },
+      {
+        src: B44,
+        alt: "B44",
+      },
+      {
+        src: B45,
+        alt: "B45",
+      },
+      {
+        src: B46,
+        alt: "B46",
+      },
+      {
+        src: B47,
+        alt: "B47",
+      },
+      {
+        src: B48,
+        alt: "B48",
+      },
+    ],
+
+    title: "Title",
+    content: "Content",
+    audio: B4Audio,
+  },
+  {
+    mediaDialog: [
+      {
+        src: B5,
+        alt: "B5",
+      },
+    ],
+
+    title: "Title",
+    content: "Content",
+    audio: B5Audio,
+  },
+];
 export default function SchoolPage() {
   const classes = useStyles();
 
@@ -178,251 +296,111 @@ export default function SchoolPage() {
 
   const handleShowImage = () => {
     setShowImage(!showImage);
-  }
+  };
+
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+
   return (
     <>
-  
-    <div className={classes.styleRadio}>
-    <ReactAudioPlayer
-  src={AudioB1}
-  autoPlay
-  controls
-  loop
-/>
-    </div>
       <Helmet titleTemplate="%s - SCHOOL PAGE" defaultTitle="SCHOOL PAGE">
         <meta name="description" content="A VLU : SCHOOL PAGE" />
       </Helmet>
       <div className={classes.styleDiv}>
         <div className={classes.styleButtonTop}>
-        <AtomIconButton color='primary' onClick={handleShowImage}>
+          {/* <AtomIconButton color='primary' onClick={handleShowImage}>
           <ButtonMove go />
-        </AtomIconButton>
+        </AtomIconButton> */}
+          <AtomButtonLink color="primary" onClick={handleShowImage}>
+            <AtomTypography variant="h5">
+              <b>Let's go</b>
+            </AtomTypography>
+          </AtomButtonLink>
         </div>
         <span className={classes.styleContent}>
-            <TextAnimationRun content="Chào mọi người đến với khuôn viên của Trường!" propsContent={{style: {fontSize: '20px', textAlign: 'center'}}} />
-          </span>
+          <TextAnimationRun
+            content="Chào mọi người đến với khuôn viên của Trường!"
+            propsContent={{ style: { fontSize: "20px", textAlign: "center" } }}
+          />
+        </span>
 
-          <div className={classes.styleContentImage}>
-          {showImage && <>
-           <MakeGrid 
-           containerProps={{justifyContent: 'center'}}
-           allGridProps={{xs:12, sm: 8, md: 6}}
-           grids={[{
-             children:(
-              <ViewMediaGDS
-              mediaProps={[
-                {
-                  src: B2,
-                  alt: 'B2',
-                },{
-                src: B22,
-                alt: 'B22',
-              },{
-                src: B23,
-                alt: 'B23',
-              },{
-                src: B24,
-                alt: 'B24',
-              },{
-                src: B25,
-                alt: 'B25',
-              },{
-                src: B26,
-                alt: 'B26',
-              },{
-                src: B27,
-                alt: 'B27',
-              },{
-                src: B28,
-                alt: 'B28',
-              }]}
-            >
-              <AtomCardMedia43
-                image={B2}
-                alt='B2'
-                className={classes.styleImage}
-              >
-                <div id="styleDivContent">
-                 <AtomCardContent>
-               <SectionTemplate spacing={1}> 
-               <AtomTypography variant='body2'><b>Title</b></AtomTypography>
-                 <AtomDivider style={{width: '20%', background: 'white'}} />
-                  <AtomTypography variant='caption'>Content</AtomTypography>
-               </SectionTemplate>
-                 </AtomCardContent>
-                </div>
-              </AtomCardMedia43>
-            </ViewMediaGDS>
-             )
-           }]} />
+        <div className={classes.styleRadio}>
+          <ReactAudioPlayer
+            src={B1Audio}
+            autoPlay
+            controls
+          />
+        </div>
 
+        <div className={classes.styleContentImage}>
+          {showImage && (
+            <div>
+              <MakeGrid
+                containerProps={{ justifyContent: "center" }}
+                allGridProps={{ xs: 12, sm: 9, md: 6 }}
+                grids={[
+                  {
+                    children: (
+                      <SwipeableViews
+                        index={activeStep}
+                        onChangeIndex={handleStepChange}
+                        enableMouseEvents
+                      >
+                        {dataStep.map((step, index) => {
+                          const slideKey = `slideKey-${index}`;
+                          return (
+                            <div key={slideKey}>
+                              {Math.abs(activeStep - index) <= 2 ? (
+                                <div style={{ position: "relative" }}>
+                                  <ViewMediaGDS mediaProps={step.mediaDialog} audioProps={step.audio}>
+                                    <AtomCardMedia43
+                                      image={step.mediaDialog[0].src}
+                                      alt="step.mediaDialog[0].src"
+                                      className={classes.styleImage}
+                                    >
+                                      <div id="styleDivContent">
+                                        <AtomCardContent>
+                                          <SectionTemplate spacing={1}>
+                                            <AtomTypography variant="body2">
+                                              <b>{step.title}</b>
+                                            </AtomTypography>
+                                            <AtomDivider
+                                              style={{
+                                                width: "20%",
+                                                background: "white",
+                                              }}
+                                            />
+                                            <AtomTypography variant="caption">
+                                              {step.content}
+                                            </AtomTypography>
+                                          </SectionTemplate>
+                                        </AtomCardContent>
+                                      </div>
+                                    </AtomCardMedia43>
+                                  </ViewMediaGDS>
+                                  <Pagination
+                                    dots={dataStep.length}
+                                    index={activeStep}
+                                    onChangeIndex={handleStepChange}
+                                  />
+                    
+                                </div>
+                              ) : null}
+                            </div>
+                          );
+                        })}
+                      </SwipeableViews>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+          )}
+        </div>
 
-
-            {/* <MakeGrid
-         allGridProps={{xs:12, sm: 6, md: 3}}
-         grids={[{
-           children: (
-            <ViewMediaGDS
-            mediaProps={[
-              {
-                src: B2,
-                alt: 'B2',
-              },{
-              src: B22,
-              alt: 'B22',
-            },{
-              src: B23,
-              alt: 'B23',
-            },{
-              src: B24,
-              alt: 'B24',
-            },{
-              src: B25,
-              alt: 'B25',
-            },{
-              src: B26,
-              alt: 'B26',
-            },{
-              src: B27,
-              alt: 'B27',
-            },{
-              src: B28,
-              alt: 'B28',
-            }]}
-          >
-            <AtomCardMedia43
-              image={B2}
-              alt='B2'
-              className={classes.styleImage}
-            >
-              <div id="styleDivContent">
-               <AtomCardContent>
-             <SectionTemplate spacing={1}> 
-             <AtomTypography variant='body2'><b>Title</b></AtomTypography>
-               <AtomDivider style={{width: '20%', background: 'white'}} />
-                <AtomTypography variant='caption'>Content</AtomTypography>
-             </SectionTemplate>
-               </AtomCardContent>
-              </div>
-            </AtomCardMedia43>
-          </ViewMediaGDS>
-           )
-         }, {
-           children: (
-            <ViewMediaGDS
-            mediaProps={[
-              {
-                src: B3,
-                alt: 'B3',
-              },{
-              src: B32,
-              alt: 'B32',
-            },{
-              src: B33,
-              alt: 'B33',
-            }]}
-          >
-            <AtomCardMedia43
-              image={B3}
-              alt='B3'
-              className={classes.styleImage}
-            >
-                   <div id="styleDivContent">
-               <AtomCardContent>
-               <SectionTemplate spacing={1}> 
-             <AtomTypography variant='body2'><b>Title</b></AtomTypography>
-               <AtomDivider style={{width: '20%', background: 'white'}} />
-                <AtomTypography variant='caption'>Content</AtomTypography>
-             </SectionTemplate>
-               </AtomCardContent>
-              </div>
-            </AtomCardMedia43>
-          </ViewMediaGDS>
-           )
-         },
-         {
-          children: (
-           <ViewMediaGDS
-           mediaProps={[
-            {
-              src: B4,
-              alt: 'B4',
-            },{
-            src: B42,
-            alt: 'B42',
-          },{
-            src: B43,
-            alt: 'B43',
-          },{
-            src: B44,
-            alt: 'B44',
-          },{
-            src: B45,
-            alt: 'B45',
-          },{
-            src: B46,
-            alt: 'B46',
-          },{
-            src: B47,
-            alt: 'B47',
-          },{
-            src: B48,
-            alt: 'B48',
-          }]}
-         >
-           <AtomCardMedia43
-             image={B4}
-             alt='B4'
-             className={classes.styleImage}
-           >
-                <div id="styleDivContent">
-               <AtomCardContent>
-               <SectionTemplate spacing={1}> 
-             <AtomTypography variant='body2'><b>Title</b></AtomTypography>
-               <AtomDivider style={{width: '20%', background: 'white'}} />
-                <AtomTypography variant='caption'>Content</AtomTypography>
-             </SectionTemplate>
-               </AtomCardContent>
-              </div>
-           </AtomCardMedia43>
-         </ViewMediaGDS>
-          )
-        },
-        {
-          children:(
-           <ViewMediaGDS
-           mediaProps={[{
-            src: B5,
-            alt: 'B5',
-          }]}
-         >
-           <AtomCardMedia43
-             image={B5}
-             alt='B5'
-             className={classes.styleImage}
-           >
-               <div id="styleDivContent">
-               <AtomCardContent>
-               <SectionTemplate spacing={1}> 
-             <AtomTypography variant='body2'><b>Title</b></AtomTypography>
-               <AtomDivider style={{width: '20%', background: 'white'}} />
-                <AtomTypography variant='caption'>Content</AtomTypography>
-             </SectionTemplate>
-               </AtomCardContent>
-              </div>
-           </AtomCardMedia43>
-         </ViewMediaGDS>
-          )
-        }]} /> */}
-          
-          
-          
-          </>}        
-          </div>
-
-         
-        
         <PageBackground image={welcomeBackground2} />
       </div>
     </>

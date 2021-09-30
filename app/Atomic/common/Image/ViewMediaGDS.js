@@ -1,49 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-import AtomToolbar from 'Atomic/atoms/Toolbar';
-import HaloDialog from 'Atomic/molecules/HaloDialog';
-import MakeGrid from 'Atomic/molecules/Grid/MakeGrid';
-import AtomIconButtonLight from 'Atomic/atoms/IconButton/AtomIconButtonLight';
-import AtomIconButtonDark from 'Atomic/atoms/IconButton/AtomIconButtonDark';
-import ArrowLeftLargeIcon from 'icons/ArrowLeftLargeIcon';
-import ArrowRightLargeIcon from 'icons/ArrowRightLargeIcon';
-import FullScreenIcon from 'icons/FullScreenIcon';
-import CloseIcon from 'icons/CloseIcon';
-import TagIcon from 'icons/TagIcon';
-import AtomBox from '../../atoms/Box';
-import AtomIconButton from '../../atoms/IconButton';
+import AtomToolbar from "Atomic/atoms/Toolbar";
+import HaloDialog from "Atomic/molecules/HaloDialog";
+import MakeGrid from "Atomic/molecules/Grid/MakeGrid";
+import AtomIconButtonDark from "Atomic/atoms/IconButton/AtomIconButtonDark";
+import CloseIcon from "icons/CloseIcon";
+import AtomBox from "../../atoms/Box";
 
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
-const breakpoint = 'md'; // điểm chuyển layout
+import ReactAudioPlayer from "react-audio-player";
 
-export const useStyles = makeStyles(theme => ({
+const breakpoint = "md"; // điểm chuyển layout
+
+export const useStyles = makeStyles((theme) => ({
   dialogContent: {
-    overflowY: 'auto',
+    overflowY: "auto",
 
-    overflow: 'hidden',
-
+    overflow: "hidden",
   },
   dialogContentLeft: {
-    position: 'relative',
-    width: '100%',
-    height: '100vh',
+    position: "relative",
+    width: "100%",
+    height: "100vh",
     backgroundColor: theme.palette.common.black,
     [theme.breakpoints.up(breakpoint)]: {
-      height: '100vh',
+      height: "100vh",
     },
   },
   // hiển thị ảnh/video
   mediaContainer: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up(breakpoint)]: {
@@ -53,34 +48,33 @@ export const useStyles = makeStyles(theme => ({
   mediaItem: {
     // maxWidth: '100%',
     // width: '100%',
-    maxHeight: '100%',
-    objectFit: 'contain',
-    outline: 'none',
-    borderRadius: '9px',
+    maxHeight: "100%",
+    objectFit: "contain",
+    outline: "none",
+    borderRadius: "9px",
     transition: "all 2s ease",
 
     "&:hover": {
-      transform: 'scale(1.2, 1.2)',
+      transform: "scale(1.2, 1.2)",
     },
-
   },
   mediaToolbar: {
-    position: 'absolute',
+    position: "absolute",
     top: theme.spacing(2),
     left: 0,
     right: 0,
     zIndex: 1,
   },
   navButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     bottom: 0,
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     padding: theme.spacing(0, 2),
-    '&:hover': {
+    "&:hover": {
       opacity: 1,
       backgroundColor: theme.palette.action.focus,
     },
@@ -91,10 +85,18 @@ export const useStyles = makeStyles(theme => ({
   nextButton: {
     right: 0,
   },
+  styleRadio: {
+    display: 'none',
+  }
 }));
 
 /* dialog xem media */
-export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
+export default function ViewMediaGDS({
+  children,
+  mediaProps,
+  audioProps,
+  ...restProps
+}) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -108,25 +110,25 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
   const [indexImage, setIndexImage] = useState(0);
 
   const handleBackImage = () => {
-    if(indexImage - 1 > -1){
-      setIndexImage(indexImage - 1)
+    if (indexImage - 1 > -1) {
+      setIndexImage(indexImage - 1);
     }
-  }
+  };
 
   const handleNextImage = () => {
-    if(indexImage + 1 < mediaProps.length){
-      setIndexImage(indexImage + 1)
+    if (indexImage + 1 < mediaProps.length) {
+      setIndexImage(indexImage + 1);
     }
-  }
+  };
 
-  useEffect(()=> {
-    setIndexImage(0)
-  }, [])
+  useEffect(() => {
+    setIndexImage(0);
+  }, []);
 
   return (
     <React.Fragment>
       <AtomBox
-        style={{ cursor: 'pointer', height: '100%' }}
+        style={{ cursor: "pointer", height: "100%" }}
         onClick={handleOpen}
         {...restProps}
       >
@@ -141,6 +143,10 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
         fullScreenMobile
         contentCustomize={
           <div className={classes.dialogContent}>
+            <div className={classes.styleRadio}>
+              <ReactAudioPlayer src={audioProps} autoPlay controls />
+            </div>
+
             <MakeGrid
               containerProps={{ spacing: 0 }}
               grids={[
@@ -154,8 +160,8 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                       >
                         <MakeGrid
                           containerProps={{
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
+                            alignItems: "center",
+                            justifyContent: "space-between",
                           }}
                           grids={[
                             {
@@ -188,11 +194,15 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                       </AtomToolbar>
 
                       <div className={classes.mediaContainer}>
-                          <img
-                            className={classes.mediaItem}
-                            src={mediaProps[indexImage] && mediaProps[indexImage].src}
-                            alt={mediaProps[indexImage] && mediaProps[indexImage].alt}
-                          />
+                        <img
+                          className={classes.mediaItem}
+                          src={
+                            mediaProps[indexImage] && mediaProps[indexImage].src
+                          }
+                          alt={
+                            mediaProps[indexImage] && mediaProps[indexImage].alt
+                          }
+                        />
                       </div>
 
                       {/* thanh điều hướng */}
@@ -200,21 +210,26 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
                         <div
                           className={clsx(
                             classes.navButton,
-                            classes.prevButton,
+                            classes.prevButton
                           )}
                         >
-                          <AtomIconButtonDark aria-label="previous" onClick={handleBackImage}>
+                          <AtomIconButtonDark
+                            aria-label="previous"
+                            onClick={handleBackImage}
+                          >
                             <NavigateBeforeIcon />
                           </AtomIconButtonDark>
                         </div>
                         <div
                           className={clsx(
-
                             classes.navButton,
-                            classes.nextButton,
+                            classes.nextButton
                           )}
                         >
-                          <AtomIconButtonDark aria-label="next" onClick={handleNextImage}>
+                          <AtomIconButtonDark
+                            aria-label="next"
+                            onClick={handleNextImage}
+                          >
                             <NavigateNextIcon />
                           </AtomIconButtonDark>
                         </div>
@@ -234,4 +249,5 @@ export default function ViewMediaGDS({ children, mediaProps, ...restProps }) {
 ViewMediaGDS.propTypes = {
   children: PropTypes.node, // thành phần để mở ảnh
   mediaProps: PropTypes.any, // thông tin media (src, title, alt...)
+  audioProps: PropTypes.any,
 };
