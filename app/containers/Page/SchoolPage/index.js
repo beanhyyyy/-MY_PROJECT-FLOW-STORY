@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import TextAnimationRun from "../../../Atomic/common/Text/TextAnimationRun";
 
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
+
 import SwipeableViews from "react-swipeable-views";
 
 // import B1 from "images/B1.png";
@@ -31,6 +34,8 @@ import B48 from "images/B48.jpg";
 
 import B5 from "images/B5.jpg";
 
+import B6 from "images/B6.png";
+
 import PageBackground from "Atomic/templates/PageBackground";
 import makeStyles from "@material-ui/styles/makeStyles";
 
@@ -43,8 +48,6 @@ import MakeGrid from "../../../Atomic/molecules/Grid/MakeGrid";
 import AtomCardContent from "../../../Atomic/atoms/CardContent";
 import AtomDivider from "../../../Atomic/atoms/Divider";
 import SectionTemplate from "../../../Atomic/templates/SectionTemplate";
-import ButtonMove from "../../../Atomic/common/Button/ButtonMove";
-import AtomIconButton from "../../../Atomic/atoms/IconButton";
 
 import Pagination from "../../../Atomic/common/Pagination";
 
@@ -55,6 +58,12 @@ import B2Audio from "./B2Audio.mp3";
 import B3Audio from "./B3Audio.mp3";
 import B4Audio from "./B4Audio.mp3";
 import B5Audio from "./B5Audio.mp3";
+import B6Audio from "./B6Audio.mp3";
+
+import startVideo from "video/startVideo.mp4";
+import AtomBox from "../../../Atomic/atoms/Box";
+import AtomIconButton from "../../../Atomic/atoms/IconButton";
+import ButtonMove from "../../../Atomic/common/Button/ButtonMove";
 
 const useStyles = makeStyles((theme) => ({
   styleDiv: {
@@ -215,6 +224,8 @@ const dataStep = [
     title: "Tòa F",
     content: "Bấm để tiếp tục tham quan tòa F nhé!",
     audio: B2Audio,
+    link: 0,
+    video: 0,
   },
   {
     mediaDialog: [
@@ -232,9 +243,11 @@ const dataStep = [
       },
     ],
 
-    title: "Title",
-    content: "Content",
+    title: "Tòa G",
+    content: "Bấm để tiếp tục tham quan tòa G nhé!",
     audio: B3Audio,
+    link: 0,
+    video: 0,
   },
   {
     mediaDialog: [
@@ -272,9 +285,11 @@ const dataStep = [
       },
     ],
 
-    title: "Title",
-    content: "Content",
+    title: "Tòa LV",
+    content: "Bấm để tham quan tòa LV nhé!",
     audio: B4Audio,
+    link: 0,
+    video: 1,
   },
   {
     mediaDialog: [
@@ -284,19 +299,38 @@ const dataStep = [
       },
     ],
 
-    title: "Title",
-    content: "Content",
+    title: "Hội trường Trịnh Công Sơn",
+    content:
+      "CONTENT : Hội trường Trịnh Công Sơn",
     audio: B5Audio,
+    link: 0,
+    video: 0,
+  },
+  {
+    mediaDialog: [
+      {
+        src: B6,
+        alt: "B6",
+      },
+    ],
+
+    title: " Chiếc Kinh khí cầu của K27 nhà SOHU",
+    content:
+      "Chiếc Kinh khí cầu của K27 nhà SOHU sắp cất cánh, bấm vào để bay lên trải nghiệm cùng Ban Tổ chức nhé!",
+    audio: B6Audio,
+    link: 1,
+    video: 0,
   },
 ];
 export default function SchoolPage() {
   const classes = useStyles();
 
-  const [showImage, setShowImage] = useState(false);
+  const theme = useTheme(); // check màn hình
+  const isMobie = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleShowImage = () => {
-    setShowImage(!showImage);
-  };
+  const [showStart, setShowStart] = useState(false);
+
+  const [showImage, setShowImage] = useState(false);
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -304,6 +338,19 @@ export default function SchoolPage() {
     setActiveStep(step);
   };
 
+  const handleStepGo = () => {
+    setActiveStep(step + 1);
+  };
+
+  const handleShowStart = () => {
+    setShowStart(true);
+  };
+
+  const handleShowImage = () => {
+    setShowStart(false);
+
+    setShowImage(true);
+  };
   return (
     <>
       <Helmet titleTemplate="%s - SCHOOL PAGE" defaultTitle="SCHOOL PAGE">
@@ -311,33 +358,67 @@ export default function SchoolPage() {
       </Helmet>
       <div className={classes.styleDiv}>
         <div className={classes.styleButtonTop}>
-          {/* <AtomIconButton color='primary' onClick={handleShowImage}>
-          <ButtonMove go />
-        </AtomIconButton> */}
-          <AtomButtonLink color="primary" onClick={handleShowImage}>
-            <AtomTypography variant="h5">
-              <b>Let's go</b>
-            </AtomTypography>
-          </AtomButtonLink>
+          {showStart ? (
+            <>
+              {!showImage ? (
+                <AtomButtonLink color="primary" onClick={handleShowImage}>
+                  <AtomTypography variant="h5">
+                    <b>Cùng tham quan nào !!!</b>
+                  </AtomTypography>
+                </AtomButtonLink>
+              ) : (
+                ""
+              )}
+            </>
+          ) : (
+            <>
+              {!showImage ? (
+                <AtomButtonLink color="primary" onClick={handleShowStart}>
+                  <AtomTypography variant="h5">
+                    <b>Let's go</b>
+                  </AtomTypography>
+                </AtomButtonLink>
+              ) : (
+                ""
+              )}
+            </>
+          )}
+
+          {showImage && (
+            <AtomIconButton color="primary" onClick={handleStepGo}>
+              <ButtonMove go />
+            </AtomIconButton>
+          )}
         </div>
         <span className={classes.styleContent}>
           <TextAnimationRun
-            content="Chào mọi người đến với khuôn viên của Trường!"
+            content={
+              showStart
+                ? "Trước khi tham quan thì cùng mình xem một video khá thú vị nha!"
+                : "Chào các bạn sinh viên đến với khuôn viên trường ĐH Văn Lang!"
+            }
             propsContent={{ style: { fontSize: "20px", textAlign: "center" } }}
           />
         </span>
 
-        <div className={classes.styleRadio}>
-          <ReactAudioPlayer
-            src={B1Audio}
-            autoPlay
-            controls
-          />
-        </div>
-
         <div className={classes.styleContentImage}>
+          {showStart && (
+            <AtomBox textAlign="center ">
+              <video
+                width={isMobie ? "320" : "800"}
+                height={isMobie ? "400" : "500"}
+                controls
+              >
+                <source src={startVideo} type="video/mp4" />
+              </video>
+            </AtomBox>
+          )}
+
           {showImage && (
             <div>
+              <div className={classes.styleRadio}>
+                <ReactAudioPlayer src={B1Audio} autoPlay controls />
+              </div>
               <MakeGrid
                 containerProps={{ justifyContent: "center" }}
                 allGridProps={{ xs: 12, sm: 9, md: 9, lg: 6 }}
@@ -355,7 +436,12 @@ export default function SchoolPage() {
                             <div key={slideKey}>
                               {Math.abs(activeStep - index) <= 2 ? (
                                 <div style={{ position: "relative" }}>
-                                  <ViewMediaGDS mediaProps={step.mediaDialog} audioProps={step.audio}>
+                                  <ViewMediaGDS
+                                    mediaProps={step.mediaDialog}
+                                    audioProps={step.audio}
+                                    linkProps={step.link}
+                                    videoProps={step.video}
+                                  >
                                     <AtomCardMedia43
                                       image={step.mediaDialog[0].src}
                                       alt="step.mediaDialog[0].src"
@@ -386,7 +472,6 @@ export default function SchoolPage() {
                                     index={activeStep}
                                     onChangeIndex={handleStepChange}
                                   />
-                    
                                 </div>
                               ) : null}
                             </div>

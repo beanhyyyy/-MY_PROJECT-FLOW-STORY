@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
+
 import AtomToolbar from "Atomic/atoms/Toolbar";
 import HaloDialog from "Atomic/molecules/HaloDialog";
 import MakeGrid from "Atomic/molecules/Grid/MakeGrid";
@@ -14,6 +17,12 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
 import ReactAudioPlayer from "react-audio-player";
+import AtomTypography from "../../atoms/Typography";
+import AtomRouterLink from "../../atoms/RouterLink";
+import AtomLink from "../../atoms/Link";
+import AtomTypographyWithCircle from "../../atoms/Typography/AtomTypographyWithCircle";
+
+import startVideo from "video/startVideo.mp4";
 
 const breakpoint = "md"; // điểm chuyển layout
 
@@ -86,8 +95,8 @@ export const useStyles = makeStyles((theme) => ({
     right: 0,
   },
   styleRadio: {
-    display: 'none',
-  }
+    display: "none",
+  },
 }));
 
 /* dialog xem media */
@@ -95,9 +104,14 @@ export default function ViewMediaGDS({
   children,
   mediaProps,
   audioProps,
+  linkProps,
+  videoProps,
   ...restProps
 }) {
   const classes = useStyles();
+
+  const theme = useTheme(); // check màn hình
+  const isMobie = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -116,7 +130,10 @@ export default function ViewMediaGDS({
   };
 
   const handleNextImage = () => {
-    if (indexImage + 1 < mediaProps.length) {
+    if (
+      indexImage + 1 <
+      (videoProps ? mediaProps.length + 1 : mediaProps.length )
+    ) {
       setIndexImage(indexImage + 1);
     }
   };
@@ -203,7 +220,50 @@ export default function ViewMediaGDS({
                             mediaProps[indexImage] && mediaProps[indexImage].alt
                           }
                         />
+                        <>
+                        {console.log('indexImage', indexImage)}
+                          {indexImage === mediaProps.length && videoProps && (
+                            <video
+                              width={isMobie ? "320" : "800"}
+                              height={isMobie ? "400" : "500"}
+                              controls
+                            >
+                              <source src={startVideo} type="video/mp4" />
+                            </video>
+                          )}
+                        </>
                       </div>
+                      {linkProps && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "80vh",
+                            left: "10vw",
+                          }}
+                        >
+                          <AtomTypography component="div">
+                            Cùng nhau check-in nhé:&nbsp;
+                            <AtomTypography
+                              component={AtomLink}
+                              href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUQjdPODVYSTBJRTZRSUpGRFlOUlNEOENLWC4u&fbclid=IwAR2sYwpQZTdejBPTejMOpimfCEfixfyE9pgLhRhtvRumF9L-Dm1_GIZbwFI"
+                              target="_blank"
+                              variant="body2"
+                            >
+                              <b>Tại đây</b>
+                            </AtomTypography>
+                            &nbsp; hoặc{" "}
+                            <AtomTypography
+                              component={AtomLink}
+                              href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUNVZXUTI5NFVORzIyUDhDWDZTWTBXQk02Wi4u&fbclid=IwAR0d9ZEBo-nwZu8I6GhuZ5gHnUbinD5agQy2BB2fA9akP4vdlk-6sP7-oD4"
+                              target="_blank"
+                              variant="body2"
+                            >
+                              <b>Tại đây</b>
+                            </AtomTypography>{" "}
+                            nhé !
+                          </AtomTypography>
+                        </div>
+                      )}
 
                       {/* thanh điều hướng */}
                       <nav>
@@ -250,4 +310,6 @@ ViewMediaGDS.propTypes = {
   children: PropTypes.node, // thành phần để mở ảnh
   mediaProps: PropTypes.any, // thông tin media (src, title, alt...)
   audioProps: PropTypes.any,
+  linkProps: PropTypes.any,
+  videoProps: PropTypes.any,
 };
