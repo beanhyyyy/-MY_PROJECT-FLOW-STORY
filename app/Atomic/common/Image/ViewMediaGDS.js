@@ -18,11 +18,21 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
 import ReactAudioPlayer from "react-audio-player";
 import AtomTypography from "../../atoms/Typography";
-import AtomRouterLink from "../../atoms/RouterLink";
 import AtomLink from "../../atoms/Link";
-import AtomTypographyWithCircle from "../../atoms/Typography/AtomTypographyWithCircle";
 
 import startVideo from "video/startVideo.mp4";
+import middleVideo2 from "video/middleVideo2.mp4";
+import endVideo from "video/endVideo.mp4";
+
+import B2AudioEnd from "end/B2AudioEnd.mp3";
+import B2ImageEnd from "end/B2ImageEnd.jpg";
+
+import B3AudioEnd from "end/B3AudioEnd.mp3";
+import B3ImageEnd from "end/B3ImageEnd.gif";
+
+import B4AudioEnd from "end/B4AudioEnd.mp3";
+
+import B5ImageEnd from "end/B5ImageEnd.png";
 
 const breakpoint = "md"; // điểm chuyển layout
 
@@ -132,10 +142,16 @@ export default function ViewMediaGDS({
   const handleNextImage = () => {
     if (
       indexImage + 1 <
-      (videoProps ? mediaProps.length + 1 : mediaProps.length )
+      (videoProps ? mediaProps.length + 5 : mediaProps.length)
     ) {
       setIndexImage(indexImage + 1);
     }
+  };
+
+  const [fire, setFire] = React.useState(false);
+
+  const handleFire = () => {
+    setFire(true);
   };
 
   useEffect(() => {
@@ -221,7 +237,6 @@ export default function ViewMediaGDS({
                           }
                         />
                         <>
-                        {console.log('indexImage', indexImage)}
                           {indexImage === mediaProps.length && videoProps && (
                             <video
                               width={isMobie ? "320" : "800"}
@@ -231,9 +246,83 @@ export default function ViewMediaGDS({
                               <source src={startVideo} type="video/mp4" />
                             </video>
                           )}
+
+                          {indexImage === mediaProps.length + 1 && (
+                            <video
+                              width={isMobie ? "320" : "800"}
+                              height={isMobie ? "400" : "500"}
+                              controls
+                            >
+                              <source src={middleVideo2} type="video/mp4" />
+                            </video>
+                          )}
+
+                          {indexImage === mediaProps.length + 2 && (
+                            <>
+                              {!fire ? (
+                                <>
+                                  <img
+                                    className={classes.mediaItem}
+                                    src={B2ImageEnd}
+                                    alt="B2ImageEnd"
+                                    onClick={handleFire}
+                                  />
+                                  <div className={classes.styleRadio}>
+                                    <ReactAudioPlayer
+                                      src={B2AudioEnd}
+                                      autoPlay
+                                      controls
+                                    />
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    className={classes.mediaItem}
+                                    src={B3ImageEnd}
+                                    alt="B3ImageEnd"
+                                  />
+                                  <div className={classes.styleRadio}>
+                                    <ReactAudioPlayer
+                                      src={B3AudioEnd}
+                                      autoPlay
+                                      controls
+                                    />
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
+
+                          {indexImage === mediaProps.length + 3 && (
+                            <video
+                              width={isMobie ? "320" : "800"}
+                              height={isMobie ? "400" : "500"}
+                              controls
+                            >
+                              <source src={endVideo} type="video/mp4" />
+                            </video>
+                          )}
+
+                          {indexImage === mediaProps.length + 4 && (
+                            <>
+                              <img
+                                className={classes.mediaItem}
+                                src={B5ImageEnd}
+                                alt="B5ImageEnd"
+                              />
+                              <div className={classes.styleRadio}>
+                                <ReactAudioPlayer
+                                  src={B4AudioEnd}
+                                  autoPlay
+                                  controls
+                                />
+                              </div>
+                            </>
+                          )}
                         </>
                       </div>
-                      {linkProps && (
+                      {linkProps && indexImage < mediaProps.length && (
                         <div
                           style={{
                             position: "absolute",
@@ -241,7 +330,7 @@ export default function ViewMediaGDS({
                             left: "10vw",
                           }}
                         >
-                          <AtomTypography component="div">
+                          <AtomTypography component="div" variant='h6'>
                             Cùng nhau check-in nhé:&nbsp;
                             <AtomTypography
                               component={AtomLink}
@@ -251,15 +340,15 @@ export default function ViewMediaGDS({
                             >
                               <b>Tại đây</b>
                             </AtomTypography>
-                            &nbsp; hoặc{" "}
+                            &nbsp; hoặc
                             <AtomTypography
                               component={AtomLink}
                               href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUNVZXUTI5NFVORzIyUDhDWDZTWTBXQk02Wi4u&fbclid=IwAR0d9ZEBo-nwZu8I6GhuZ5gHnUbinD5agQy2BB2fA9akP4vdlk-6sP7-oD4"
                               target="_blank"
                               variant="body2"
                             >
-                              <b>Tại đây</b>
-                            </AtomTypography>{" "}
+                              &nbsp;<b>Tại đây</b>&nbsp;
+                            </AtomTypography>
                             nhé !
                           </AtomTypography>
                         </div>

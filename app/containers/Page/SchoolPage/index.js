@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import TextAnimationRun from "../../../Atomic/common/Text/TextAnimationRun";
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import useTheme from "@material-ui/core/styles/useTheme";
-
 import SwipeableViews from "react-swipeable-views";
 
 // import B1 from "images/B1.png";
@@ -34,7 +31,7 @@ import B48 from "images/B48.jpg";
 
 import B5 from "images/B5.jpg";
 
-import B6 from "images/B6.png";
+import B66 from "images/B66.png";
 
 import PageBackground from "Atomic/templates/PageBackground";
 import makeStyles from "@material-ui/styles/makeStyles";
@@ -289,7 +286,7 @@ const dataStep = [
     content: "Bấm để tham quan tòa LV nhé!",
     audio: B4Audio,
     link: 0,
-    video: 1,
+    video: 0,
   },
   {
     mediaDialog: [
@@ -309,8 +306,8 @@ const dataStep = [
   {
     mediaDialog: [
       {
-        src: B6,
-        alt: "B6",
+        src: B66,
+        alt: "B66",
       },
     ],
 
@@ -319,16 +316,11 @@ const dataStep = [
       "Chiếc Kinh khí cầu của K27 nhà SOHU sắp cất cánh, bấm vào để bay lên trải nghiệm cùng Ban Tổ chức nhé!",
     audio: B6Audio,
     link: 1,
-    video: 0,
+    video: 1,
   },
 ];
 export default function SchoolPage() {
   const classes = useStyles();
-
-  const theme = useTheme(); // check màn hình
-  const isMobie = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const [showStart, setShowStart] = useState(false);
 
   const [showImage, setShowImage] = useState(false);
 
@@ -342,13 +334,7 @@ export default function SchoolPage() {
     setActiveStep(step + 1);
   };
 
-  const handleShowStart = () => {
-    setShowStart(true);
-  };
-
   const handleShowImage = () => {
-    setShowStart(false);
-
     setShowImage(true);
   };
   return (
@@ -358,31 +344,13 @@ export default function SchoolPage() {
       </Helmet>
       <div className={classes.styleDiv}>
         <div className={classes.styleButtonTop}>
-          {showStart ? (
-            <>
-              {!showImage ? (
-                <AtomButtonLink color="primary" onClick={handleShowImage}>
-                  <AtomTypography variant="h5">
-                    <b>Cùng tham quan nào !!!</b>
-                  </AtomTypography>
-                </AtomButtonLink>
-              ) : (
-                ""
-              )}
-            </>
-          ) : (
-            <>
-              {!showImage ? (
-                <AtomButtonLink color="primary" onClick={handleShowStart}>
+     
+  {!showImage && <AtomButtonLink color="primary" onClick={handleShowImage}>
                   <AtomTypography variant="h5">
                     <b>Let's go</b>
                   </AtomTypography>
-                </AtomButtonLink>
-              ) : (
-                ""
-              )}
-            </>
-          )}
+                </AtomButtonLink>}
+
 
           {showImage && (
             <AtomIconButton color="primary" onClick={handleStepGo}>
@@ -392,33 +360,21 @@ export default function SchoolPage() {
         </div>
         <span className={classes.styleContent}>
           <TextAnimationRun
-            content={
-              showStart
-                ? "Trước khi tham quan thì cùng mình xem một video khá thú vị nha!"
-                : "Chào các bạn sinh viên đến với khuôn viên trường ĐH Văn Lang!"
-            }
+            content='Chào các bạn sinh viên đến với khuôn viên trường ĐH Văn Lang!'
             propsContent={{ style: { fontSize: "20px", textAlign: "center" } }}
           />
         </span>
 
         <div className={classes.styleContentImage}>
-          {showStart && (
-            <AtomBox textAlign="center ">
-              <video
-                width={isMobie ? "320" : "800"}
-                height={isMobie ? "400" : "500"}
-                controls
-              >
-                <source src={startVideo} type="video/mp4" />
-              </video>
-            </AtomBox>
+          {!showImage && (
+          <div className={classes.styleRadio}>
+          <ReactAudioPlayer src={B1Audio} autoPlay controls />
+        </div>
           )}
 
           {showImage && (
             <div>
-              <div className={classes.styleRadio}>
-                <ReactAudioPlayer src={B1Audio} autoPlay controls />
-              </div>
+    
               <MakeGrid
                 containerProps={{ justifyContent: "center" }}
                 allGridProps={{ xs: 12, sm: 9, md: 9, lg: 6 }}
