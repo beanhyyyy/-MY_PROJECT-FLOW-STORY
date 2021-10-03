@@ -49,6 +49,8 @@ import SectionTemplate from "../../../Atomic/templates/SectionTemplate";
 import Pagination from "../../../Atomic/common/Pagination";
 
 import ReactAudioPlayer from "react-audio-player";
+import AudioPlayer from "react-h5-audio-player";
+import 'react-h5-audio-player/lib/styles.css';
 
 import B1Audio from "./B1Audio.mp3";
 import B2Audio from "./B2Audio.mp3";
@@ -181,9 +183,9 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.down("sm")]: {
       display: "block",
-      position: 'absolute',
+      position: "absolute",
       top: "90vh",
-      left: '50%',
+      left: "50%",
       transform: "translate(-50%, -50%)",
     },
   },
@@ -304,8 +306,7 @@ const dataStep = [
     ],
 
     title: "Hội trường Trịnh Công Sơn",
-    content:
-      "Bấm để tham quan Hội trường Trịnh Công Sơn nhé!",
+    content: "Bấm để tham quan Hội trường Trịnh Công Sơn nhé!",
     audio: B5Audio,
     link: 0,
     video: 0,
@@ -351,13 +352,13 @@ export default function SchoolPage() {
       </Helmet>
       <div className={classes.styleDiv}>
         <div className={classes.styleButtonTop}>
-     
-  {!showImage && <AtomButtonLink color="primary" onClick={handleShowImage}>
-                  <AtomTypography variant="h5">
-                    <b>Let's go</b>
-                  </AtomTypography>
-                </AtomButtonLink>}
-
+          {!showImage && (
+            <AtomButtonLink color="primary" onClick={handleShowImage}>
+              <AtomTypography variant="h5">
+                <b>Let's go</b>
+              </AtomTypography>
+            </AtomButtonLink>
+          )}
 
           {showImage && (
             <AtomIconButton color="primary" onClick={handleStepGo}>
@@ -367,21 +368,27 @@ export default function SchoolPage() {
         </div>
         <span className={classes.styleContent}>
           <TextAnimationRun
-            content='Chào các bạn sinh viên đến với khuôn viên trường ĐH Văn Lang!'
+            content="Chào các bạn sinh viên đến với khuôn viên trường ĐH Văn Lang!"
             propsContent={{ style: { fontSize: "20px", textAlign: "center" } }}
           />
         </span>
 
         <div className={classes.styleContentImage}>
           {!showImage && (
-          <div className={classes.styleRadio}>
-          <ReactAudioPlayer src={B1Audio} autoPlay controls />
-        </div>
+            <div className={classes.styleRadio}>
+              {/* <ReactAudioPlayer src={B1Audio} autoPlay controls /> */}
+              <AudioPlayer
+                autoPlay
+                src={B1Audio}
+                onPlay={(e) => console.log("onPlay")}
+                controls
+                // other props here
+              />
+            </div>
           )}
 
           {showImage && (
             <div>
-    
               <MakeGrid
                 containerProps={{ justifyContent: "center" }}
                 allGridProps={{ xs: 12, sm: 9, md: 9, lg: 6 }}
