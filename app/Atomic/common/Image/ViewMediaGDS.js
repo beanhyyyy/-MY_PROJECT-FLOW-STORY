@@ -33,6 +33,8 @@ import B3ImageEnd from "end/B3ImageEnd.gif";
 import B4AudioEnd from "end/B4AudioEnd.mp3";
 
 import B5ImageEnd from "end/B5ImageEnd.png";
+import TextAnimationRun from "../Text/TextAnimationRun";
+import { linearColor } from "../../_settings/variables";
 
 const breakpoint = "md"; // điểm chuyển layout
 
@@ -106,6 +108,28 @@ export const useStyles = makeStyles((theme) => ({
   },
   styleRadio: {
     display: "none",
+  },
+  styleContent: {
+    position: "absolute",
+    transform: "translate(-50%, -50%)",
+    left: "50%",
+    top: "80vh",
+    overflow: "hidden",
+    background: linearColor,
+
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      top: "85vh",
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "90vw",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "40vw",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "35vw",
+    },
   },
 }));
 
@@ -323,35 +347,50 @@ export default function ViewMediaGDS({
                         </>
                       </div>
                       {linkProps && indexImage < mediaProps.length && (
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "80vh",
-                            left: "10vw",
-                          }}
-                        >
-                          <AtomTypography component="div" variant='h6'>
-                            Cùng nhau check-in nhé:&nbsp;
-                            <AtomTypography
-                              component={AtomLink}
-                              href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUQjdPODVYSTBJRTZRSUpGRFlOUlNEOENLWC4u&fbclid=IwAR2sYwpQZTdejBPTejMOpimfCEfixfyE9pgLhRhtvRumF9L-Dm1_GIZbwFI"
-                              target="_blank"
-                              variant="body2"
-                            >
-                              <b>Tại đây</b>
-                            </AtomTypography>
-                            &nbsp; hoặc
-                            <AtomTypography
-                              component={AtomLink}
-                              href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUNVZXUTI5NFVORzIyUDhDWDZTWTBXQk02Wi4u&fbclid=IwAR0d9ZEBo-nwZu8I6GhuZ5gHnUbinD5agQy2BB2fA9akP4vdlk-6sP7-oD4"
-                              target="_blank"
-                              variant="body2"
-                            >
-                              &nbsp;<b>Tại đây</b>&nbsp;
-                            </AtomTypography>
-                            nhé !
-                          </AtomTypography>
-                        </div>
+                        <span className={classes.styleContent}>
+                          <TextAnimationRun
+                            content={
+                              <span>
+                                <b>Cùng nhau check-in:</b>&nbsp;
+                                <AtomTypography
+                                  component={AtomLink}
+                                  href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUQjdPODVYSTBJRTZRSUpGRFlOUlNEOENLWC4u&fbclid=IwAR2sYwpQZTdejBPTejMOpimfCEfixfyE9pgLhRhtvRumF9L-Dm1_GIZbwFI"
+                                  target="_blank"
+                                  style={{ color: "blue" }}
+                                >
+                                  <b>Tại đây</b>&nbsp;
+                                </AtomTypography>
+                                <b>nhé !</b>
+                              </span>
+                            }
+                            propsContent={{
+                              style: { textAlign: "center" },
+                            }}
+                          />
+                        </span>
+                      )}
+                      {linkProps && indexImage === mediaProps.length + 4 && (
+                        <span className={classes.styleContent}>
+                          <TextAnimationRun
+                            content={
+                              <span>
+                                <b>Cùng nhau check-out:</b>&nbsp;
+                                <AtomTypography
+                                  component={AtomLink}
+                                  href="https://forms.office.com/pages/responsepage.aspx?id=S6URMF0KKUm_AqAHh4d8ahrkA1XRKVxGpJlrT6kdWGRUNVZXUTI5NFVORzIyUDhDWDZTWTBXQk02Wi4u&fbclid=IwAR0d9ZEBo-nwZu8I6GhuZ5gHnUbinD5agQy2BB2fA9akP4vdlk-6sP7-oD4"
+                                  target="_blank"
+                                  style={{ color: "blue" }}
+                                >
+                                  <b>Tại đây</b>&nbsp;
+                                </AtomTypography>
+                                <b>nhé !</b>
+                              </span>
+                            }
+                            propsContent={{
+                              style: { textAlign: "center" },
+                            }}
+                          />
+                        </span>
                       )}
 
                       {/* thanh điều hướng */}
