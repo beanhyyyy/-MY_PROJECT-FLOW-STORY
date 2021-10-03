@@ -31,6 +31,20 @@ import B48 from "images/B48.jpg";
 
 import B5 from "images/B5.jpg";
 
+import B231 from "images/B231.jpg";
+import B241 from "images/B241.jpg";
+import B251 from "images/B251.jpg";
+import B431 from "images/B431.jpg";
+import B432 from "images/B432.jpg";
+import B433 from "images/B433.jpg";
+import B451 from "images/B451.jpg";
+import B51 from "images/B51.jpg";
+import B29 from "images/B29.jpg";
+import B34 from "images/B34.jpg";
+import B35 from "images/B35.jpg";
+import B36 from "images/B36.jpg";
+import B37 from "images/B37.jpg";
+
 import B66 from "images/B66.png";
 
 import PageBackground from "Atomic/templates/PageBackground";
@@ -49,8 +63,6 @@ import SectionTemplate from "../../../Atomic/templates/SectionTemplate";
 import Pagination from "../../../Atomic/common/Pagination";
 
 import ReactAudioPlayer from "react-audio-player";
-import AudioPlayer from "react-h5-audio-player";
-import 'react-h5-audio-player/lib/styles.css';
 
 import B1Audio from "./B1Audio.mp3";
 import B2Audio from "./B2Audio.mp3";
@@ -207,12 +219,24 @@ const dataStep = [
         alt: "B23",
       },
       {
+        src: B231,
+        alt: "B231",
+      },
+      {
         src: B24,
         alt: "B24",
       },
       {
+        src: B241,
+        alt: "B241",
+      },
+      {
         src: B25,
         alt: "B25",
+      },
+      {
+        src: B251,
+        alt: "B251",
       },
       {
         src: B26,
@@ -225,6 +249,10 @@ const dataStep = [
       {
         src: B28,
         alt: "B28",
+      },
+      {
+        src: B29,
+        alt: "B29",
       },
     ],
     title: "Tòa F",
@@ -246,6 +274,22 @@ const dataStep = [
       {
         src: B33,
         alt: "B33",
+      },
+      {
+        src: B34,
+        alt: "B34",
+      },
+      {
+        src: B35,
+        alt: "B35",
+      },
+      {
+        src: B36,
+        alt: "B36",
+      },
+      {
+        src: B37,
+        alt: "B37",
       },
     ],
 
@@ -270,12 +314,28 @@ const dataStep = [
         alt: "B43",
       },
       {
+        src: B431,
+        alt: "B431",
+      },
+      {
+        src: B432,
+        alt: "B432",
+      },
+      {
+        src: B433,
+        alt: "B433",
+      },
+      {
         src: B44,
         alt: "B44",
       },
       {
         src: B45,
         alt: "B45",
+      },
+      {
+        src: B451,
+        alt: "B451",
       },
       {
         src: B46,
@@ -302,6 +362,10 @@ const dataStep = [
       {
         src: B5,
         alt: "B5",
+      },
+      {
+        src: B51,
+        alt: "B51",
       },
     ],
 
@@ -376,14 +440,7 @@ export default function SchoolPage() {
         <div className={classes.styleContentImage}>
           {!showImage && (
             <div className={classes.styleRadio}>
-              {/* <ReactAudioPlayer src={B1Audio} autoPlay controls /> */}
-              <AudioPlayer
-                autoPlay
-                src={B1Audio}
-                onPlay={(e) => console.log("onPlay")}
-                controls
-                // other props here
-              />
+              <ReactAudioPlayer src={B1Audio} autoPlay controls />
             </div>
           )}
 
