@@ -272,10 +272,6 @@ const dataStep = [
         alt: "B32",
       },
       {
-        src: B33,
-        alt: "B33",
-      },
-      {
         src: B34,
         alt: "B34",
       },
@@ -290,6 +286,10 @@ const dataStep = [
       {
         src: B37,
         alt: "B37",
+      },
+      {
+        src: B33,
+        alt: "B33",
       },
     ],
 

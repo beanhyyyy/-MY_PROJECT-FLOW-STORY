@@ -40,8 +40,6 @@ const breakpoint = "md"; // điểm chuyển layout
 
 export const useStyles = makeStyles((theme) => ({
   dialogContent: {
-    overflowY: "auto",
-
     overflow: "hidden",
   },
   dialogContentLeft: {
@@ -126,7 +124,7 @@ export const useStyles = makeStyles((theme) => ({
 
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      top: "85vh",
+      top: "70vh",
     },
     [theme.breakpoints.down("md")]: {
       width: "90vw",
