@@ -108,6 +108,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   styleRadio: {
     display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      position: 'absolute',
+      top: '85vh',
+      left: '50%',
+      transform: "translate(-50%, -50%)",
+    },
   },
   styleContent: {
     position: "absolute",
@@ -200,10 +207,6 @@ export default function ViewMediaGDS({
         fullScreenMobile
         contentCustomize={
           <div className={classes.dialogContent}>
-            <div className={classes.styleRadio}>
-              <ReactAudioPlayer src={audioProps} autoPlay controls />
-            </div>
-
             <MakeGrid
               containerProps={{ spacing: 0 }}
               grids={[
@@ -249,7 +252,7 @@ export default function ViewMediaGDS({
                           ]}
                         />
                       </AtomToolbar>
-
+                    
                       <div className={classes.mediaContainer}>
                         <img
                           className={classes.mediaItem}
@@ -346,6 +349,13 @@ export default function ViewMediaGDS({
                           )}
                         </>
                       </div>
+
+                        
+                      <div className={classes.styleRadio}>
+              <ReactAudioPlayer src={audioProps} autoPlay controls />
+            </div>
+            
+
                       {linkProps && indexImage < mediaProps.length && (
                         <span className={classes.styleContent}>
                           <TextAnimationRun

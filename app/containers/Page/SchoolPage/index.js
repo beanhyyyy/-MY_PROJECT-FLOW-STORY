@@ -179,6 +179,13 @@ const useStyles = makeStyles((theme) => ({
   },
   styleRadio: {
     display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+      position: 'absolute',
+      top: "90vh",
+      left: '50%',
+      transform: "translate(-50%, -50%)",
+    },
   },
 }));
 
