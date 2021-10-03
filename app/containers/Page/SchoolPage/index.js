@@ -305,7 +305,7 @@ const dataStep = [
 
     title: "Hội trường Trịnh Công Sơn",
     content:
-      "CONTENT : Hội trường Trịnh Công Sơn",
+      "Bấm để tham quan Hội trường Trịnh Công Sơn nhé!",
     audio: B5Audio,
     link: 0,
     video: 0,
