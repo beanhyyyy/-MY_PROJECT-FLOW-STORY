@@ -264,12 +264,12 @@ export default function ViewMediaGDS({
                             mediaProps[indexImage] && mediaProps[indexImage].alt
                           }
                         />
-                        {((indexImage === mediaProps.length ||
+                        {(indexImage === mediaProps.length ||
                           indexImage === mediaProps.length + 1 ||
                           indexImage === mediaProps.length + 2 ||
                           indexImage === mediaProps.length + 3 ||
                           indexImage === mediaProps.length + 4) &&
-                        videoProps) ? (
+                        videoProps ? (
                           <>
                             <div className={classes.styleRadioDisplay}>
                               <ReactAudioPlayer
@@ -296,6 +296,7 @@ export default function ViewMediaGDS({
                               width={isMobie ? "320" : "800"}
                               height={isMobie ? "400" : "500"}
                               controls
+                              id="v-control" autoplay="autoplay" 
                             >
                               <source src={startVideo} type="video/mp4" />
                             </video>
@@ -306,6 +307,7 @@ export default function ViewMediaGDS({
                               width={isMobie ? "320" : "800"}
                               height={isMobie ? "400" : "500"}
                               controls
+                              id="v-control" autoplay="autoplay" 
                             >
                               <source src={middleVideo2} type="video/mp4" />
                             </video>
@@ -353,6 +355,7 @@ export default function ViewMediaGDS({
                               width={isMobie ? "320" : "800"}
                               height={isMobie ? "400" : "500"}
                               controls
+                              id="v-control" autoplay="autoplay" 
                             >
                               <source src={endVideo} type="video/mp4" />
                             </video>
