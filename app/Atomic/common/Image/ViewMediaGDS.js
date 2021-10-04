@@ -108,9 +108,9 @@ export const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.down("md")]: {
       display: "block",
-      position: 'absolute',
-      top: '85vh',
-      left: '50%',
+      position: "absolute",
+      top: "85vh",
+      left: "50%",
       transform: "translate(-50%, -50%)",
     },
   },
@@ -135,6 +135,9 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       width: "35vw",
     },
+  },
+  styleRadioDisplay: {
+    display: "none",
   },
 }));
 
@@ -250,7 +253,7 @@ export default function ViewMediaGDS({
                           ]}
                         />
                       </AtomToolbar>
-                    
+
                       <div className={classes.mediaContainer}>
                         <img
                           className={classes.mediaItem}
@@ -261,6 +264,32 @@ export default function ViewMediaGDS({
                             mediaProps[indexImage] && mediaProps[indexImage].alt
                           }
                         />
+                        {((indexImage === mediaProps.length ||
+                          indexImage === mediaProps.length + 1 ||
+                          indexImage === mediaProps.length + 2 ||
+                          indexImage === mediaProps.length + 3 ||
+                          indexImage === mediaProps.length + 4) &&
+                        videoProps) ? (
+                          <>
+                            <div className={classes.styleRadioDisplay}>
+                              <ReactAudioPlayer
+                                src={audioProps}
+                                autoPlay
+                                controls
+                                muted
+                              />
+                            </div>
+                          </>
+                        ) : (
+                          <div className={classes.styleRadio}>
+                            <ReactAudioPlayer
+                              src={audioProps}
+                              autoPlay
+                              controls
+                            />
+                          </div>
+                        )}
+
                         <>
                           {indexImage === mediaProps.length && videoProps && (
                             <video
@@ -347,12 +376,6 @@ export default function ViewMediaGDS({
                           )}
                         </>
                       </div>
-
-                        
-                      <div className={classes.styleRadio}>
-              <ReactAudioPlayer src={audioProps} autoPlay controls />
-            </div>
-            
 
                       {linkProps && indexImage < mediaProps.length && (
                         <span className={classes.styleContent}>
