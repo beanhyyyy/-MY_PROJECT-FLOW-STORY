@@ -64,15 +64,14 @@ import Pagination from "../../../Atomic/common/Pagination";
 
 import ReactAudioPlayer from "react-audio-player";
 
-import B1Audio from "./B1Audio.mp3";
 import B2Audio from "./B2Audio.mp3";
 import B3Audio from "./B3Audio.mp3";
 import B4Audio from "./B4Audio.mp3";
 import B5Audio from "./B5Audio.mp3";
 import B6Audio from "./B6Audio.mp3";
 
-import startVideo from "video/startVideo.mp4";
-import AtomBox from "../../../Atomic/atoms/Box";
+import AudioB1 from './AudioB1.mp3';
+
 import AtomIconButton from "../../../Atomic/atoms/IconButton";
 import ButtonMove from "../../../Atomic/common/Button/ButtonMove";
 
@@ -86,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     top: "90vh",
     [theme.breakpoints.down("sm")]: {
-      top: "80vh",
+      top: "75vh",
     },
   },
   styleContent: {
@@ -196,7 +195,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "block",
       position: "absolute",
-      top: "90vh",
+      top: "85vh",
       left: "50%",
       transform: "translate(-50%, -50%)",
     },
@@ -440,7 +439,7 @@ export default function SchoolPage() {
         <div className={classes.styleContentImage}>
           {!showImage && (
             <div className={classes.styleRadio}>
-              <ReactAudioPlayer src={B1Audio} autoPlay controls />
+              <ReactAudioPlayer src={AudioB1} autoPlay controls />
             </div>
           )}
 
